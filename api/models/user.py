@@ -53,9 +53,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
+   
+
     # Tell Django to use the email field as the unique identifier for the
     # user account instead of its built in behavior of using the username.
     USERNAME_FIELD = 'email'
+
+     # Any time we call User.objects (such as in objects.all() or objects.filter())
+    # make sure to use the custom user manager we created.
+
+    objects = UserManager()
+
 
     # Standard Python: We'll create a string representation so when
     # the class is output we'll get something meaningful.
